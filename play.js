@@ -1,32 +1,20 @@
-//var n=6;
-//var sequence = [0,1,1,2,3,5,8];
-//console.log(sequence.length);
-//
-//function count (n) {
-//    for (var i = 1; i < n; i++) {
-//        console.log(i);
-//    }
-//}
-//
-//count(6);
+// http://callmenick.com/post/basic-front-end-testing-with-mocha-chai
 
-function fibonacci (n) {
-    if (n===0) {
-        return console.log(0);
-    } else if (n===1) {
-        return console.log(1);
-    } else {
-        var sequence = [0,1];
-        for (var i = 1; i < n; i++) {
-            var l = sequence.length;
-            var F = sequence[l-1] + sequence[l-2];
-            var total = sequence.push(F);
-            //console.log(sequence);
-            var L = sequence.length;
+var expect = require('chai').expect;
 
-        }
-        return console.log(sequence[L-1]);
-    }
+function isEven(num) {
+    if (num % 2 !== 0) return false;
+    return true;
 }
 
-fibonacci(0);
+describe('Is Even Tests', function() {
+   it('Should always return a boolean', function () {
+       expect(isEven(2)).to.be.a('boolean');
+   });
+    it('76 is even and should return true', function () {
+        expect(isEven(76)).to.be.true;
+    });
+    it('77 is odd and should return false', function () {
+        expect(isEven(77)).to.be.false;
+    });
+});
