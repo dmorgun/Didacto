@@ -6,58 +6,62 @@
 //
 //Define a function called 'fibonacci' with a single argument n. The function should return the nth number of the fibonacci sequence.
 
-//function fibonacci (n) {
-//    var sequence = [0,1];
-//    for (var i = 1; i < n; i++) {
-//        var l = sequence.length;
-//        var F = sequence[l-1] + sequence[l-2];
-//        var total = sequence.push(F);
-//        //console.log(sequence);
-//        var L = sequence.length;
-//        //var Fib = console.log(sequence[L-1]);
-//    }
-//    return console.log(sequence[L-1]);
-//
-//}
-
-
-
-function fibonacci1(n) {
-    var result;
-    if (n === 0 || n === 1) {
-        result =  n;
-    } else {
-        result = fibonacci(n-1) + fibonacci(n-2);
-    }
-    return result;
-}
-
 function fibonacci(n) {
-    var result,
-        prev = 1,
-        prevOfPrev = 0;
-
-
-    if (n === 0 ){
-        result = prevOfPrev;
-    } else if (n === 1){
-        result = prev;
+    var sequence = [0, 1];
+    if (n === 0 || n === 1) {
+        return n;
     } else {
-
-        var i;
-        //console.log('Fibonacci =  ', n);
-        //console.log('Number of iterations ', n - i +1);
-        for (i = 2; i <= n; i++) {  //N-i,  N-1 = 2
-            result = prev + prevOfPrev;
-
-            prevOfPrev = prev;
-            prev = result;
+        for (var i = 1; i < n; i++) {
+            var l = sequence.length;
+            var F = sequence[l - 1] + sequence[l - 2];
+            var total = sequence.push(F);
+            //console.log(sequence);
+            var L = sequence.length;
+            //var Fib = console.log(sequence[L-1]);
         }
-
+        return sequence[L - 1];
     }
 
-    return result;
 }
+
+//Artem's implemetation
+
+//function fibonacci1(n) {
+//    var result;
+//    if (n === 0 || n === 1) {
+//        result =  n;
+//    } else {
+//        result = fibonacci(n-1) + fibonacci(n-2);
+//    }
+//    return result;
+//}
+//
+//function fibonacci(n) {
+//    var result,
+//        prev = 1,
+//        prevOfPrev = 0;
+//
+//
+//    if (n === 0 ){
+//        result = prevOfPrev;
+//    } else if (n === 1){
+//        result = prev;
+//    } else {
+//
+//        var i;
+//        //console.log('Fibonacci =  ', n);
+//        //console.log('Number of iterations ', n - i +1);
+//        for (i = 2; i <= n; i++) {  //N-i,  N-1 = 2
+//            result = prev + prevOfPrev;
+//
+//            prevOfPrev = prev;
+//            prev = result;
+//        }
+//
+//    }
+//
+//    return result;
+//}
 
 
 //console.log('Result of 0 is ',fibonacci(0),'should be ', 0, '\n');
@@ -74,10 +78,14 @@ function fibonacci(n) {
  */
 
 var expect = require('chai').expect;
+var assert = require('chai').assert
 
 describe('Fibonacci Tests', function() {
-    it('Should always return a Number', function () {
+    it('fibonacci(n) should always return a Number', function () {
         expect(fibonacci(2)).to.be.a('number');
+    });
+    it('fibonacci(n) is not an Array', function () {
+        assert.isNotArray(fibonacci(2));
     });
     it('Result of fibonacci(0) is 0', function () {
         expect(fibonacci(0)).to.equal(0);
@@ -89,10 +97,10 @@ describe('Fibonacci Tests', function() {
         expect(fibonacci(2)).to.equal(1);
     });
     it('Result of fibonacci(3) is 2', function () {
-        expect(fibonacci(3)).to.equal(2);
+        assert.equal(fibonacci(3),'2');
     });
-    it('Result of fibonacci(4) is 3', function () {
-        expect(fibonacci(4)).to.equal(3);
+    it('Result of fibonacci(4) is truthy', function () {
+        assert.ok(fibonacci(4));
     });
     it('Result of fibonacci(10) is 55', function () {
         expect(fibonacci(10)).to.equal(55);
