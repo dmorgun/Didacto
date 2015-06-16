@@ -6,23 +6,23 @@
 //
 //Define a function called 'fibonacci' with a single argument n. The function should return the nth number of the fibonacci sequence.
 
-function fibonacci(n) {
-    var sequence = [0, 1];
-    if (n === 0 || n === 1) {
-        return n;
-    } else {
-        for (var i = 1; i < n; i++) {
-            var l = sequence.length;
-            var F = sequence[l - 1] + sequence[l - 2];
-            var total = sequence.push(F);
-            //console.log(sequence);
-            var L = sequence.length;
-            //var Fib = console.log(sequence[L-1]);
-        }
-        return sequence[L - 1];
-    }
-
-}
+//function fibonacci(n) {
+//    var sequence = [0, 1];
+//    if (n === 0 || n === 1) {
+//        return n;
+//    } else {
+//        for (var i = 1; i < n; i++) {
+//            var l = sequence.length;
+//            var F = sequence[l - 1] + sequence[l - 2];
+//            var total = sequence.push(F);
+//            //console.log(sequence);
+//            var L = sequence.length;
+//            //var Fib = console.log(sequence[L-1]);
+//        }
+//        return sequence[L - 1];
+//    }
+//
+//}
 
 //Artem's implemetation
 
@@ -35,6 +35,16 @@ function fibonacci(n) {
 //    }
 //    return result;
 //}
+
+
+//@Daria - here is fast recursion, please research while it works faster then prev. implementation
+function fibonacci(n, val, prev) {
+    val = val || 1;
+    prev = prev || 0;
+    if (n == 0) return prev;
+    if (n == 1) return val;
+    return fibonacci(n - 1, val + prev, val);
+}
 //
 //function fibonacci(n) {
 //    var result,
@@ -78,7 +88,9 @@ function fibonacci(n) {
  */
 
 var expect = require('chai').expect;
-var assert = require('chai').assert
+
+//@Daria - you should not mix TDD and DBB styles - choose one :)
+var assert = require('chai').assert;
 
 describe('Fibonacci Tests', function() {
     it('fibonacci(n) should always return a Number', function () {
@@ -107,5 +119,10 @@ describe('Fibonacci Tests', function() {
     });
     it('Result of fibonacci(50) is 12586269025', function () {
         expect(fibonacci(50)).to.equal(12586269025);
+    });
+
+    //@Daria - and what about negative scenarios?
+    it('Result of fibonacci(-1) should throw error', function() {
+        expect(fibonacci.bind(null, -1)).to.throw('Wrong value!');
     });
 });
